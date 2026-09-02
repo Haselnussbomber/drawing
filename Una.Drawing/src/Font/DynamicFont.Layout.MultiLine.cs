@@ -1,5 +1,4 @@
-﻿using Dalamud.Game.Text.SeStringHandling;
-using System.Text;
+﻿using Lumina.Text.ReadOnly;
 
 namespace Una.Drawing.Font;
 
@@ -14,10 +13,10 @@ internal partial class DynamicFont
     /// <param name="lineHeightFactor">Factor to multiply the default line height by.</param>
     /// <returns>A MeasuredText object containing the lines and dimensions.</returns>
     private MeasuredText MeasureMultiLine(
-        object text,
-        int    fontSize,
-        float  maxWidth,
-        float  lineHeightFactor
+        ReadOnlySeString text,
+        int              fontSize,
+        float            maxWidth,
+        float            lineHeightFactor
     )
     {
         List<Chunk> chunks = GenerateChunks(text, fontSize);

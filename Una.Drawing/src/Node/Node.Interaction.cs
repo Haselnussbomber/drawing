@@ -417,7 +417,7 @@ public partial class Node
     
     private void RenderTooltip()
     {
-        if (string.IsNullOrWhiteSpace(Tooltip)) return;
+        if (Tooltip.IsEmpty) return;
         
         if (!IsMouseInNodeBounds(this, new(), false)) {
             _tooltipHoverStartTime = 0;
@@ -436,7 +436,7 @@ public partial class Node
             ImGui.PushStyleColor(ImGuiCol.Text, TooltipTextColor);
             ImGui.BeginTooltip();
             ImGui.PushTextWrapPos(420.0f);
-            ImGui.TextUnformatted(Tooltip);
+            ImGui.TextUnformatted(Tooltip.ToString());
             ImGui.EndTooltip();
             ImGui.PopStyleColor(2);
             ImGui.PopStyleVar(2);

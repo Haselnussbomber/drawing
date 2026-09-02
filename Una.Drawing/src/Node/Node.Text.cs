@@ -1,5 +1,4 @@
-﻿using Dalamud.Game.Text.SeStringHandling;
-using Una.Drawing.Font;
+﻿using Una.Drawing.Font;
 
 namespace Una.Drawing;
 
@@ -44,11 +43,11 @@ public partial class Node
     /// </summary>
     internal Size ComputeContentSizeFromText()
     {
-        if (!_mustRecomputeNodeValue && (_nodeValue is not string str || string.IsNullOrEmpty(str)) && (_nodeValue is not SeString seStr || seStr.Payloads.Count == 0)) {
+        if (!_mustRecomputeNodeValue && _nodeValue.IsEmpty) {
             return new(0, 0);
         }
 
-        if (!_mustRecomputeNodeValue && false == MustRecomputeNodeValue()) {
+        if (!_mustRecomputeNodeValue && !MustRecomputeNodeValue()) {
             return NodeValueMeasurement?.Size ?? new();
         }
 
@@ -74,7 +73,7 @@ public partial class Node
         }
 
         NodeValueMeasurement = font.MeasureText(
-            NodeValue!,
+            NodeValue,
             ComputedStyle.FontSize,
             maxLineWidth,
             ComputedStyle.WordWrap,
@@ -92,20 +91,12 @@ public partial class Node
     /// </summary>
     internal bool MustRecomputeNodeValue()
     {
-        if (_nodeValue is null && !(NodeValueMeasurement?.Size.IsZero ?? false)) {
-            NodeValueMeasurement = new();
-            return false;
-        }
-
-        return _nodeValue is not null
-               && (
-                   !_textCachedFontId.Equals(ComputedStyle.Font)
-                   || (!_textCachedNodeSize?.Equals(ComputedStyle.Size) ?? true)
-                   || (!_textCachedFontSize?.Equals(ComputedStyle.FontSize) ?? true)
-                   || (!_textCachedWordWrap?.Equals(ComputedStyle.WordWrap) ?? true)
-                   || (!_textCachedNodeValue?.Equals(_nodeValue) ?? true)
-                   || (!_textCachedMaxWidth?.Equals(ComputedStyle.MaxWidth) ?? true)
-                   || !_textCachedPadding.Equals(ComputedStyle.Padding)
-               );
+        return !_textCachedFontId.Equals(ComputedStyle.Font)
+            || (!_textCachedNodeSize?.Equals(ComputedStyle.Size) ?? true)
+            || (!_textCachedFontSize?.Equals(ComputedStyle.FontSize) ?? true)
+            || (!_textCachedWordWrap?.Equals(ComputedStyle.WordWrap) ?? true)
+            || (!_textCachedNodeValue?.Equals(_nodeValue) ?? true)
+            || (!_textCachedMaxWidth?.Equals(ComputedStyle.MaxWidth) ?? true)
+            || !_textCachedPadding.Equals(ComputedStyle.Padding);
     }
 }

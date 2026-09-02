@@ -108,7 +108,7 @@ public partial class Node
 
             ComputedStyle.CommitResult result = style.Commit(ref _intermediateStyle);
 
-            int  nodeValueHash   = NodeValue?.GetHashCode() ?? 0;
+            int  nodeValueHash   = NodeValue.GetHashCode();
             bool isLayoutUpdated = nodeValueHash != _lastNodeValueHash;
 
             if (result.HasFlag(ComputedStyle.CommitResult.LayoutUpdated)) {

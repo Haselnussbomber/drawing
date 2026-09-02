@@ -244,12 +244,12 @@ public partial class Node
 
     private bool UpdateTexture()
     {
-        if (NodeValue is null && !ComputedStyle.HasDrawables()) {
+        if (NodeValue.IsEmpty && !ComputedStyle.HasDrawables()) {
             _consecutiveRedraws = 0;
             return false;
         }
 
-        bool hasDrawables = ComputedStyle.HasDrawables() || NodeValue != null;
+        bool hasDrawables = ComputedStyle.HasDrawables() || !NodeValue.IsEmpty;
 
         if (_mustRepaint && hasDrawables && Width > 0 && Height > 0) {
             Vector2 padding = new(64, 64); // Optimization point: Only add padding when needed.

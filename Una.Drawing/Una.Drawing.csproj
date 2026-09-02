@@ -22,16 +22,7 @@
         <PackageReference Include="SkiaSharp" Version="3.118.0-preview.1.2" />
         <Reference Include="TerraFX.Interop.Windows">
             <HintPath>$(DalamudLibPath)TerraFX.Interop.Windows.dll</HintPath>
-	        <Private>false</Private>
+            <Private>false</Private>
         </Reference>
-    </ItemGroup>
-
-    <ItemGroup>
-        <EditorConfigFiles Remove="D:\source\repos\umbra\drawing\Una.Drawing\.editorconfig" />
-        <EditorConfigFiles Remove=".editorconfig" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <None Include="D:\source\repos\umbra\drawing\Una.Drawing\.editorconfig" />
     </ItemGroup>
 </Project>
