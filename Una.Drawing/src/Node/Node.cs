@@ -1,4 +1,4 @@
-﻿using Dalamud.Game.Text.SeStringHandling;
+﻿using Lumina.Text.ReadOnly;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -53,34 +53,12 @@ public partial class Node : IDisposable
         }
     }
 
-    private byte[] _seStringPayload = [];
-
     /// <summary>
     /// Defines the textual content of this node.
     /// </summary>
-    public object? NodeValue {
+    public ReadOnlySeString NodeValue {
         get => _nodeValue;
         set {
-            switch (_nodeValue) {
-                case null when value is null:
-                    return;
-                case string oldStr when value is string newStr: {
-                    if (oldStr.Equals(newStr)) return;
-                    break;
-                }
-            }
-
-            switch (value) {
-                case SeString when ReferenceEquals(value, _nodeValue):
-                    return;
-                case SeString seStr: {
-                    byte[] payload = seStr.Encode();
-                    if (_seStringPayload.SequenceEqual(payload)) return;
-                    _seStringPayload = payload;
-                    break;
-                }
-            }
-
             _nodeValue           = value;
             _textCachedNodeValue = null;
             _mustRepaint         = true;
@@ -99,7 +77,7 @@ public partial class Node : IDisposable
     /// Defining a tooltip makes this node interactive. This means that some
     /// nodes may no longer be interacted with if this node overlaps them.
     /// </remarks>
-    public string? Tooltip { get; set; }
+    public ReadOnlySeString Tooltip { get; set; }
 
     /// <summary>
     /// Returns a list of class names applied to this node.
@@ -268,10 +246,10 @@ public partial class Node : IDisposable
     /// </summary>
     public bool IsDisposed { get; private set; }
 
-    private string? _id;
-    private object? _nodeValue;
-    private bool    _inheritTags;
-    private int     _sortIndex = -1;
+    private string?          _id;
+    private ReadOnlySeString _nodeValue;
+    private bool             _inheritTags;
+    private int              _sortIndex = -1;
 
     private readonly ObservableHashSet<string>   _classList   = [];
     private readonly ObservableHashSet<string>   _tagsList    = [];
@@ -330,8 +308,8 @@ public partial class Node : IDisposable
             foreach (var child in _childNodes.ToArray()) child.Dispose();
         }
 
-        NodeValue = null;
-        Tooltip   = null;
+        NodeValue = default;
+        Tooltip   = default;
 
         DisposeEventHandlersOf(OnClick);
         DisposeEventHandlersOf(OnDoubleClick);

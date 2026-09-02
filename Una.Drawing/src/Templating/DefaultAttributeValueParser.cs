@@ -8,8 +8,8 @@ internal partial class DefaultAttributeValueParser : IUdtAttributeValueParser
 {
     public string Parse(string value)
     {
-        while (SeIconCharRegex().IsMatch(value)) {
-            Match  match = SeIconCharRegex().Match(value);
+        while (SeIconCharRegex.IsMatch(value)) {
+            Match  match = SeIconCharRegex.Match(value);
             string icon  = match.Groups[1].Value;
 
             value = value.Replace(
@@ -18,8 +18,8 @@ internal partial class DefaultAttributeValueParser : IUdtAttributeValueParser
             );
         }
 
-        while (FontAwesomeRegex().IsMatch(value)) {
-            Match  match = FontAwesomeRegex().Match(value);
+        while (FontAwesomeRegex.IsMatch(value)) {
+            Match  match = FontAwesomeRegex.Match(value);
             string icon  = match.Groups[1].Value;
             
             value = value.Replace(
@@ -34,8 +34,8 @@ internal partial class DefaultAttributeValueParser : IUdtAttributeValueParser
     public void Dispose() { }
 
     [GeneratedRegex(@"SeIcon\(([A-Za-z0-9]+)\)")]
-    private static partial Regex SeIconCharRegex();
+    private static partial Regex SeIconCharRegex { get; }
 
     [GeneratedRegex(@"FA\(([A-Za-z0-9]+)\)")]
-    private static partial Regex FontAwesomeRegex();
+    private static partial Regex FontAwesomeRegex { get; }
 }

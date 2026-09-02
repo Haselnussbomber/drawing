@@ -1,5 +1,4 @@
-﻿using Dalamud.Game.Text.SeStringHandling;
-using System.Linq;
+﻿using System.Linq;
 using Una.Drawing.Font;
 
 namespace Una.Drawing.Generator;

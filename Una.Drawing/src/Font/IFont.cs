@@ -1,4 +1,6 @@
-﻿namespace Una.Drawing.Font;
+﻿using Lumina.Text.ReadOnly;
+
+namespace Una.Drawing.Font;
 
 public interface IFont
 {
@@ -14,12 +16,12 @@ public interface IFont
     /// <param name="maxWidth">The maximum width of a single line of text.</param>
     /// <returns>A <see cref="MeasuredText"/> object containing wrapped text.</returns>
     internal MeasuredText MeasureText(
-        object text, 
-        int fontSize = 14, 
-        float? maxLineWidth = null, 
-        bool wordWrap = false, 
-        bool textOverflow = true, 
-        float lineHeight = 1.2f, 
+        ReadOnlySeString text,
+        int fontSize = 14,
+        float? maxLineWidth = null,
+        bool wordWrap = false,
+        bool textOverflow = true,
+        float lineHeight = 1.2f,
         float? maxWidth = null
     );
 
@@ -30,7 +32,7 @@ public interface IFont
     /// <param name="paint"></param>
     /// <param name="pos">The top-left position to draw the text.</param>
     /// <param name="style">The computed stylesheet.</param>
-    /// <param name="text">The measured text to render. Can be either a string or <see cref="SeString"/></param>
+    /// <param name="text">The measured text to render.</param>
     internal void DrawText(SKCanvas canvas, SKPaint paint, SKPoint pos, ComputedStyle style, Chunk[] text);
 
     /// <summary>

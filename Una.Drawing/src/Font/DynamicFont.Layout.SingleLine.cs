@@ -1,12 +1,14 @@
-﻿namespace Una.Drawing.Font;
+﻿using Lumina.Text.ReadOnly;
+
+namespace Una.Drawing.Font;
 
 internal partial class DynamicFont
 {
     private MeasuredText MeasureSingleLine(
-        object text,
-        int    fontSize,
-        float  maxWidth,
-        bool   textOverflow
+        ReadOnlySeString text,
+        int              fontSize,
+        float            maxWidth,
+        bool             textOverflow
     )
     {
         List<Chunk> chunks = GenerateChunks(text, fontSize);

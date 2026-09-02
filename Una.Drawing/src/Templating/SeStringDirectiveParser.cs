@@ -1,5 +1,4 @@
-﻿using Dalamud.Game.Text.SeStringHandling;
-using Dalamud.Utility;
+﻿using Dalamud.Utility;
 
 namespace Una.Drawing;
 
@@ -9,11 +8,10 @@ public class SeStringDirectiveParser : IUdtDirectiveParser
     
     public void Parse(Node node, string value)
     {
-        
-        SeStringBuilder builder = new();
+        using var rssb = new RentedSeStringBuilder();
 
-        builder.AppendMacroString(value);
-        
-        node.NodeValue = builder.Build();
+        node.NodeValue = rssb.Builder
+            .AppendMacroString(value)
+            .ToReadOnlySeString();
     }
 }

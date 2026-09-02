@@ -1,4 +1,5 @@
 ﻿using Dalamud.Interface;
+using Lumina.Text.ReadOnly;
 using System.Collections;
 using System.Globalization;
 using System.Reflection;
@@ -35,6 +36,11 @@ internal static class NodeAttributeParser
                 }
 
                 property.SetValue(obj, icon);
+                return;
+            }
+
+            if (propType == typeof(ReadOnlySeString)) {
+                property.SetValue(obj, ReadOnlySeString.FromMacroString(value));
                 return;
             }
 

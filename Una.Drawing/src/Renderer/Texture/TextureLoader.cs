@@ -1,9 +1,7 @@
 ﻿using Dalamud.Game.Text.SeStringHandling;
 using Dalamud.Interface.Textures;
 using Dalamud.Interface.Textures.TextureWraps;
-using Dalamud.Plugin.Services;
 using Lumina.Data.Files;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using TerraFX.Interop.DirectX;

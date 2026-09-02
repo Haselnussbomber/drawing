@@ -1,4 +1,5 @@
-﻿using Una.Drawing.Texture;
+﻿using Lumina.Text.ReadOnly;
+using Una.Drawing.Texture;
 
 namespace Una.Drawing.Font;
 
@@ -9,13 +10,13 @@ internal partial class DynamicFont(SKTypeface textTypeface, SKTypeface glyphType
     private float      SizeOffset    { get; } = sizeOffset;
 
     public MeasuredText MeasureText(
-        object text,
-        int    fontSize     = 14,
-        float? maxLineWidth = null,
-        bool   wordWrap     = false,
-        bool   textOverflow = true,
-        float  lineHeight   = 1.2f,
-        float? maxWidth     = null
+        ReadOnlySeString text,
+        int              fontSize     = 14,
+        float?           maxLineWidth = null,
+        bool             wordWrap     = false,
+        bool             textOverflow = true,
+        float            lineHeight   = 1.2f,
+        float?           maxWidth     = null
     )
     {
         if (maxWidth > 0) {
