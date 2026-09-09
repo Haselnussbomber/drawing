@@ -59,6 +59,8 @@ public partial class Node : IDisposable
     public ReadOnlySeString NodeValue {
         get => _nodeValue;
         set {
+            if (_nodeValue == value) return;
+
             _nodeValue           = value;
             _textCachedNodeValue = null;
             _mustRepaint         = true;
